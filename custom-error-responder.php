@@ -47,7 +47,6 @@ class Custom_Error_Responder {
 				KEY cer_response (cer_response)
 			);";
 	
-			error_log($sql, 0);
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 			dbDelta($sql);
 	
@@ -70,13 +69,12 @@ class Custom_Error_Responder {
 			do_action( 'respond_with_custom_error' );
 			if( ! locate_template( "{$match->cer_response}.php", true ) ) {
 				echo self::$default_errors[$match->cer_response];
-				exit;
 			}
-			return true;
+			exit;
 		}
 		
 		// TODO: else log 404?
-		return false;
+		return;
 	}	
 	
 	
